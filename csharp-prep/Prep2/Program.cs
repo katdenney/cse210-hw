@@ -10,7 +10,8 @@ class Program
         Console.Write("Please enter your grade percentage. ");
         string userInput = Console.ReadLine();
         int number = int.Parse(userInput);
-        string grade;
+        string grade = "";
+
         if (number >= 90)
         {
             grade = "A";
@@ -36,7 +37,7 @@ class Program
             Console.WriteLine("Something went wrong.");
             return;
         }
-        string sign = " ";
+        string sign = "";
         if (grade == "A" && number <= 93)
         {
             sign = "-";
@@ -76,10 +77,10 @@ class Program
         }
         else
         {
-            sign = " ";
+            sign = "";
         }
     
-        Console.WriteLine($"Your grade is {sign}{grade}");
+        Console.WriteLine($"Your grade is {grade}{sign}");
         if (number >= 70)
         {
             Console.WriteLine("Congratulations you passed the class!");
