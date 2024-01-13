@@ -6,9 +6,9 @@ class Program
     static void Main(string[] args)
     {
         string name = PromptUserName();
-        int userNumber = PromptUserNumber();
-        int number = GetSquareNumber();
+        int number = PromptUserNumber();
         int numsquared = SquareNumber(number);
+        DisplayResult(name, number,numsquared);
     }
     static void DisplayWelcome()
     {
@@ -25,16 +25,9 @@ class Program
     {
         Console.Write("Enter your favorite number: ");
         string userInput = Console.ReadLine();
-        int userNumber = int.Parse(userInput);
-        return userNumber;
-
-    }
-    static int GetSquareNumber()
-    {
-        Console.Write("Enter a number to square: ");
-        string userInput = Console.ReadLine();
         int number = int.Parse(userInput);
         return number;
+
     }
     static int SquareNumber(int number)
     {
@@ -42,8 +35,8 @@ class Program
         return number * number;
 
     }
-    static void DisplayResult()
+    static void DisplayResult(string name,int number,int numsquared)
     {
-        Console.WriteLine($"{}{}{}")
+        Console.WriteLine($"Your name is: {name}. Your favorite number is: {number}. Your favorite number squared is: {numsquared}.");
     }
 }
