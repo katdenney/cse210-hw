@@ -5,6 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        DisplayWelcome();
         string name = PromptUserName();
         int number = PromptUserNumber();
         int numsquared = SquareNumber(number);
