@@ -21,12 +21,12 @@ class ReflectingActivity : Activity
     }
     public string GetRandomPrompt()
     {
-
+        return "";
     }
 
     public string GetRandomQuestion()
     {
-
+        return "";
     }
 
     public void DisplayPrompt()
