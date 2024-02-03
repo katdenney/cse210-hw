@@ -30,8 +30,13 @@ class Activity
     {
         _duration = duration;
     }
+    
+    public Activity()
+    {
+        Console.WriteLine("used constructor with no arguments");
+    }
 
-    public Activity(string name, string desc, int duration)
+    public Activity(string name, string desc, int duration)//constructor initializing class attributes
     {
         Console.WriteLine("New Activity created.");
         //if anything needs to be done to all the classes do it here.
@@ -40,7 +45,6 @@ class Activity
         _duration = duration;
 
     }
-
     public void DisplayStartingMessage()
     {
         Console.WriteLine($"Welcome to the {_name} Activity.");
@@ -53,5 +57,13 @@ class Activity
     }
 
     //showingspinner void (int seconds)
+    public void ShowSpinner(int seconds)
+    {
+        //loop 
+        Console.Write("+");
+        Thread.Sleep(500);
+        Console.Write("\b \b");//erasing the +
+        Console.Write("-");//replacing it with -
 
+    }
 }

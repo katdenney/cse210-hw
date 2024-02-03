@@ -40,15 +40,15 @@ class Program
                 //instance of Listing activity
                 ListingActivity listing1 = new ListingActivity();
                 listing1.SetName("Listing");
-                listing1.SetDescription("");
+                listing1.SetDescription("This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.");
                 listing1.SetDuration(duration);
             }
             else if (choice == 3)
             {
-                    //instance of Reflecting activity
+                //instance of Reflecting activity
                 ReflectingActivity reflecting1 = new ReflectingActivity();
                 reflecting1.SetName("Reflecting");
-                reflecting1.SetDescription("");
+                reflecting1.SetDescription("This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
                 reflecting1.SetDuration(duration);
             }
             else if (choice == 4)
