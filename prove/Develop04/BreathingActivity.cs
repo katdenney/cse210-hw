@@ -18,13 +18,14 @@ class BreathingActivity : Activity
     
     public void Run()
     {
-        Console.WriteLine("Breathe in....");
+        Console.Write("Breathe in....");
+        Console.Write("Breathe in....6");
         Console.Write("\b \b");
         Thread.Sleep(1000);
-        Console.WriteLine("Breathe in....6");
+
         Thread.Sleep(1000);
         Console.Write("\b \b");
-        Console.WriteLine("Breathe in....5");
+        Console.Write("5");
         Thread.Sleep(1000);
         Console.Write("\b \b");
         Console.WriteLine("Breathe in....4");
