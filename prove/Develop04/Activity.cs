@@ -6,6 +6,8 @@ class Activity
     private string _description = "";
     private int _duration = 0; 
 
+    private DateTime _startTime;
+
     public string GetName()
     {
         return _name;
@@ -30,18 +32,26 @@ class Activity
     {
         _duration = duration;
     }
+    public DateTime GetStartTime()
+    {
+        return _startTime;
+    }
+    public void SetStartTime(DateTime dateTime){
+        _startTime = dateTime;
+    }
+    
     
     public Activity()
     {
-        Console.WriteLine("used constructor with no arguments");
+        Console.WriteLine("Activity: used constructor with no arguments");
     }
 
-    public Activity(string name, string desc, int duration)//constructor initializing class attributes
+    public Activity(string name, string description, int duration)//constructor initializing class attributes
     {
         Console.WriteLine("New Activity created.");
         //if anything needs to be done to all the classes do it here.
         _name = name;
-        _description = desc;
+        _description = description;
         _duration = duration;
 
     }

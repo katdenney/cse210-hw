@@ -2,40 +2,40 @@ using System;
 
 class ReflectingActivity : Activity
 {
-    private List<string> _prompts = new List<string>();
-    private List<string>_questions = new List<string>();
+    SentencesData _prompts;
+    SentencesData _questions;
 
     public ReflectingActivity()
     : base()
     {
-        Console.WriteLine("used constructor with no arguments");
+        Console.WriteLine("ReflectingActivity: used constructor with no arguments");
+        _prompts = new SentencesData("ReflectionPrompts.txt");
+        _questions =  new SentencesData("ReflectionQuestions.txt");
     }
-    public ReflectingActivity(string name, string desc, int duration, string[] prompts, string[] questions)
-    : base(name, desc, duration)
+    public ReflectingActivity(string name, string description, int duration, string[] prompts, string[] questions)
+    : base(name, description, duration)
     {
-        _prompts = new List<string>(questions);
+        _prompts = new SentencesData("ReflectionPrompts.txt");
+        _questions =  new SentencesData("ReflectionQuestions.txt");
     }
     public void Run()
     {
-
-    }
-    public string GetRandomPrompt()
-    {
-        return "";
-    }
-
-    public string GetRandomQuestion()
-    {
-        return "";
-    }
-
-    public void DisplayPrompt()
-    {
-
-    }
-
-    public void DisplayQuestion()
-    {
-
+        int duration = GetDuration();
+        bool finished = false;
+        string prompt = _prompts.GetSentences();
+        Console.WriteLine(prompt);
+        DateTime finishedTime = GetStartTime().AddSeconds(duration);
+        int sleepTime = 1667; // this is Milliseconds
+        while(!finished) //loop until time is reached
+        {  
+            string question = _questions.GetSentences();
+            Console.WriteLine(prompt);
+            Thread.Sleep(sleepTime);
+            if(DateTime.Now > finishedTime){
+                finished = true;
+                continue;
+            }
+        }
+        Console.WriteLine($"Seconds was {duration}");    
     }
 }

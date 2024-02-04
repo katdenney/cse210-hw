@@ -13,8 +13,8 @@ class Program
         string menu = """
         Menu Options:
             1. Start breathing activity
-            2. Start reflecting activity
-            3. Start listing activity
+            2. Start listing activity
+            3. Start reflecting3 activity
             4. Quit
         Select a choice from the menu:
         """;
@@ -22,8 +22,9 @@ class Program
         {
             Console.WriteLine(menu);
             choice = int.Parse(Console.ReadLine());
-            Console.WriteLine("Please give the duration for this Avtivity");
+            Console.WriteLine("Please give the duration for this activity in seconds.");
             duration = int.Parse(Console.ReadLine());
+            DateTime startTime = DateTime.Now;
             if (choice == 1)
             {
                 //instance of Breathing activity
@@ -32,8 +33,8 @@ class Program
                 breathing1.SetDescription("This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.");
                 breathing1.SetDuration(duration);
                 breathing1.DisplayStartingMessage();
+                breathing1.SetStartTime(startTime);
                 breathing1.Run();
-
             }
             else if (choice == 2)
             {
@@ -50,6 +51,7 @@ class Program
                 reflecting1.SetName("Reflecting");
                 reflecting1.SetDescription("This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
                 reflecting1.SetDuration(duration);
+                reflecting1.SetStartTime(startTime);
             }
             else if (choice == 4)
             {
