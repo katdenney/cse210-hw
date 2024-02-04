@@ -42,7 +42,8 @@ class BreathingActivity : Activity
                 Thread.Sleep(sleepTime);
                 Console.Clear();
             }
-            if(DateTime.Now > finishedTime){
+            if(DateTime.Now > finishedTime)
+            {
                 finished = true;
                 continue;
             }

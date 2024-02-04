@@ -29,12 +29,14 @@ class ReflectingActivity : Activity
         while(!finished) //loop until time is reached
         {  
             string question = _questions.GetSentences();
-            Console.WriteLine(prompt);
+            Console.WriteLine(question);
             Thread.Sleep(sleepTime);
-            if(DateTime.Now > finishedTime){
+            if(DateTime.Now > finishedTime)
+            {
                 finished = true;
                 continue;
             }
+            
         }
         Console.WriteLine($"Seconds was {duration}");    
     }
