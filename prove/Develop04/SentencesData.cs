@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 public class SentencesData
+//This code is mostly reused from my Journal project prompt class.
 {
     public string [] _sentencesList;
     public string _sentencesFileName;

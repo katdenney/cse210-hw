@@ -5,8 +5,8 @@ class ListingActivity : Activity
     private int _count;
     private List<string> _prompts = new List<string>();
 
-    public ListingActivity(string name, string desc, int duration, int count)
-    : base(name, desc, duration)
+    public ListingActivity(string name, string desc, int duration, int sleepTime, int count,int seconds)
+    : base(name, desc, duration, sleepTime, seconds)
     {
         _count = count;
     }
@@ -19,6 +19,7 @@ class ListingActivity : Activity
 
     public void Run() 
     {
+        
         
 
     }

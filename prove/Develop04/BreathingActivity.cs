@@ -9,8 +9,8 @@ class BreathingActivity : Activity
         Console.WriteLine("used constructor with no arguments");
     }
 
-    public BreathingActivity(string name, string desc, int duration)
-    : base(name, desc, duration)
+    public BreathingActivity(string name, string desc, int duration,int sleepTime, int seconds)
+    : base(name, desc, duration, sleepTime, seconds)
     {
 
     }
@@ -22,24 +22,24 @@ class BreathingActivity : Activity
         DateTime finishedTime = GetStartTime().AddSeconds(duration);
         while(!finished) // durations seconds haven't passed yet.
         {
-            int sleepTime = 250; // this is Milliseconds
             Console.Write("Breathe in....");
-            Thread.Sleep(sleepTime);
+            SleepMethod(5000);//added this seeing if this works 
+            //Thread.Sleep(sleepTime);
             Console.Clear();
 
-            for (int j = 6; j > 0; j--)
+            for (int j = 4; j > 0; j--)
                 {
                     Console.Write($"Breathe in....{j}");
-                    Thread.Sleep(sleepTime);
+                    SleepMethod(1000);
                     Console.Clear();
                 }
             Console.Write("Now breathe out...");
-            Thread.Sleep(sleepTime);
+            SleepMethod(1000);
             Console.Clear();
-            for (int k = 6; k > 0; k--)
+            for (int k = 4; k > 0; k--)
             {
                 Console.WriteLine($"Now breathe out....{k}");
-                Thread.Sleep(sleepTime);
+                SleepMethod(1000);
                 Console.Clear();
             }
             if(DateTime.Now > finishedTime)
@@ -48,7 +48,7 @@ class BreathingActivity : Activity
                 continue;
             }
         }
-        Console.WriteLine($"Seconds was {duration}");
+        
     }
 
 }

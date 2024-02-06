@@ -12,8 +12,8 @@ class ReflectingActivity : Activity
         _prompts = new SentencesData("ReflectionPrompts.txt");
         _questions =  new SentencesData("ReflectionQuestions.txt");
     }
-    public ReflectingActivity(string name, string description, int duration, string[] prompts, string[] questions)
-    : base(name, description, duration)
+    public ReflectingActivity(string name, string description, int duration, int sleepTime, int seconds, string[] prompts, string[] questions)
+    : base(name, description, duration, sleepTime, seconds)
     {
         _prompts = new SentencesData("ReflectionPrompts.txt");
         _questions =  new SentencesData("ReflectionQuestions.txt");
@@ -25,19 +25,20 @@ class ReflectingActivity : Activity
         string prompt = _prompts.GetSentences();
         Console.WriteLine(prompt);
         DateTime finishedTime = GetStartTime().AddSeconds(duration);
-        int sleepTime = 1667; // this is Milliseconds
+        //int sleepTime = 1000; // this is Milliseconds
         while(!finished) //loop until time is reached
         {  
             string question = _questions.GetSentences();
+            SleepMethod(GetSleepTime());
             Console.WriteLine(question);
-            Thread.Sleep(sleepTime);
+            SleepMethod(GetSleepTime());//just added this dont know if its working
+            //Thread.Sleep(sleepTime);
             if(DateTime.Now > finishedTime)
             {
                 finished = true;
                 continue;
             }
             
-        }
-        Console.WriteLine($"Seconds was {duration}");    
+        }   
     }
 }

@@ -13,8 +13,8 @@ class Program
         string menu = """
         Menu Options:
             1. Start breathing activity
-            2. Start listing activity
-            3. Start reflecting activity
+            2. Start reflecting activity
+            3. Start listing activity
             4. Quit
         Select a choice from the menu:
         """;
@@ -35,16 +35,9 @@ class Program
                 breathing1.DisplayStartingMessage();
                 breathing1.SetStartTime(startTime);
                 breathing1.Run();
+                breathing1.DisplayEndingMessage();
             }
             else if (choice == 2)
-            {
-                //instance of Listing activity
-                ListingActivity listing1 = new ListingActivity();
-                listing1.SetName("Listing");
-                listing1.SetDescription("This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
-                listing1.SetDuration(duration);
-            }
-            else if (choice == 3)
             {
                 //instance of Reflecting activity
                 ReflectingActivity reflecting1 = new ReflectingActivity();
@@ -54,6 +47,21 @@ class Program
                 reflecting1.DisplayStartingMessage();
                 reflecting1.SetStartTime(startTime);
                 reflecting1.Run();
+                reflecting1.DisplayEndingMessage();
+                
+            }
+            else if (choice == 3)
+            {
+                //instance of Listing activity
+                ListingActivity listing1 = new ListingActivity();
+                listing1.SetName("Listing");
+                listing1.SetDescription("This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.");
+                listing1.SetDuration(duration);
+                listing1.DisplayStartingMessage();
+                listing1.SetStartTime(startTime);
+                listing1.Run();
+                listing1.DisplayEndingMessage();
+
             }
             else if (choice == 4)
             {
