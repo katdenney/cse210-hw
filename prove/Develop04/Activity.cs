@@ -6,12 +6,12 @@ class Activity
     private string _name = "";
     private string _description = "";
     private int _duration = 0; 
-    private int _sleepTime = 1000; // this is Milliseconds  (just added this)
-    private int _seconds = 0; //(just added this)
+    private int _sleepTime = 1000; // this is Milliseconds  
+    private int _seconds = 0; 
 
     private DateTime _startTime;
     private DateTime _finishedTime;
-    //private DateTime _startSpin;//added this dont know if its right yet
+    //private DateTime _startSpin;
     
 
     public string GetName()
@@ -38,19 +38,19 @@ class Activity
     {
         _duration = duration;
     }
-    public int GetSeconds()//added this dont know if its right yet
+    public int GetSeconds()
     {
         return _seconds;
     }
-    public void SetSeconds(int seconds)//added this dont know if its right yet
+    public void SetSeconds(int seconds)
     {
         _seconds = seconds;
     }
-    public int GetSleepTime()//added this dont know if its right yet
+    public int GetSleepTime()
     {
         return _sleepTime;
     }
-    public void SetSleeptime(int sleepTime)//added this dont know if its right yet
+    public void SetSleeptime(int sleepTime)
     {
         _sleepTime = sleepTime;
     }
@@ -62,11 +62,11 @@ class Activity
     {
         _startTime = dateTime;
     }
-    public DateTime GetFinishedTime()//added this dont know if its right yet
+    public DateTime GetFinishedTime()
     {
         return _finishedTime;
     }
-    public void SetFinishedTime(DateTime finishedTime)//added this dont know if its right yet
+    public void SetFinishedTime(DateTime finishedTime)
     {
         _finishedTime = finishedTime;
     }
@@ -110,12 +110,12 @@ class Activity
 
     }
 
-    public static void SleepMethod(int sleepTime)//just added this 
+    public static void SleepMethod(int sleepTime)
     {
         Thread.Sleep(sleepTime);
     }
 
-    public void ShowCountDown(int seconds)//added this dont know if its right yet
+    public void ShowCountDown(int seconds)
     {
         bool finished = false;
         DateTime finishedTime = GetStartTime().AddSeconds(seconds);
