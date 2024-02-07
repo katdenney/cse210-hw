@@ -30,7 +30,7 @@ class Program
                 //instance of Breathing activity
                 BreathingActivity breathing1 = new BreathingActivity();
                 breathing1.SetName("Breathing");
-                breathing1.SetDescription("This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.");
+                breathing1.SetDescription("This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing.");
                 breathing1.SetDuration(duration);
                 breathing1.DisplayStartingMessage();
                 breathing1.SetStartTime(startTime);

@@ -24,15 +24,16 @@ class ReflectingActivity : Activity
         bool finished = false;
         string prompt = _prompts.GetSentences();
         Console.WriteLine(prompt);
+        Console.WriteLine("Press Enter to continue...");
+        string shouldJustBeEnterKey = Console.ReadLine();
+        //Console.WriteLine($"---- user hit: {shouldJustBeEnterKey}");
         DateTime finishedTime = GetStartTime().AddSeconds(duration);
-        //int sleepTime = 1000; // this is Milliseconds
         while(!finished) //loop until time is reached
         {  
             string question = _questions.GetSentences();
-            SleepMethod(GetSleepTime());
             Console.WriteLine(question);
-            SleepMethod(GetSleepTime());//just added this dont know if its working
-            //Thread.Sleep(sleepTime);
+            ShowSpinner(5);
+            SleepMethod(5000);//just added this dont know if its working
             if(DateTime.Now > finishedTime)
             {
                 finished = true;

@@ -6,7 +6,7 @@ class Activity
     private string _name = "";
     private string _description = "";
     private int _duration = 0; 
-    private int _sleepTime = 0; // this is Milliseconds  (just added this)
+    private int _sleepTime = 1000; // this is Milliseconds  (just added this)
     private int _seconds = 0; //(just added this)
 
     private DateTime _startTime;
@@ -73,7 +73,7 @@ class Activity
     
     public Activity()
     {
-        Console.WriteLine("Activity: used constructor with no arguments");
+        //Console.WriteLine("Activity: used constructor with no arguments");
     }
 
     public Activity(string name, string description, int duration,int sleepTime, int seconds)//constructor initializing class attributes
@@ -89,24 +89,28 @@ class Activity
     }
     public void DisplayStartingMessage()
     {
+        Console.Clear();
         Console.WriteLine("Get ready...");
-        SleepMethod(1000);
-        ShowSpinner(10);
-        Console.WriteLine("does the spinner work?");
+        //SleepMethod(2000);
+        ShowSpinner(5);
         SleepMethod(1000);
         Console.WriteLine($"Welcome to the {_name} Activity.");
+        SleepMethod(2000);
+        Console.WriteLine($"{_description}");
+        SleepMethod(6000);
+
 
     }
 
     public void DisplayEndingMessage()
     {
         Console.WriteLine("Well Done!");
-        SleepMethod(_sleepTime);
-        Console.WriteLine($"Seconds was {_duration}");
+        SleepMethod(1000);
+        Console.WriteLine($"Duration of this activity in seconds was {_duration}");
 
     }
 
-    public void SleepMethod(int sleepTime)//just added this 
+    public static void SleepMethod(int sleepTime)//just added this 
     {
         Thread.Sleep(sleepTime);
     }
@@ -115,13 +119,16 @@ class Activity
     {
         bool finished = false;
         DateTime finishedTime = GetStartTime().AddSeconds(seconds);
+        
         while(!finished)
         {
+            
             for (int i = seconds; i > 0; i--)
             {
                 Console.Write($"{i}");
-                SleepMethod(_sleepTime);
-                Console.Clear();
+                SleepMethod(1000);
+                //Console.Clear();
+                Console.Write("\b \b");
             }
             if(DateTime.Now > finishedTime)
             {
@@ -130,16 +137,17 @@ class Activity
             }
         }
     }
+
     //showingspinner void (int seconds)
-    public void ShowSpinner(int seconds)
+    public static void ShowSpinner(int seconds)
     {
-        Console.WriteLine("spinner");
+        //Console.WriteLine("spinner");
         DateTime _startSpin = DateTime.Now;
         
         //loop 
         while ((DateTime.Now - _startSpin).TotalSeconds < seconds)
         {
-        Console.Write("/");  // Frame 1
+            Console.Write("/");  // Frame 1
             Thread.Sleep(200);
             Console.Write("\b"); // Move cursor back
             Console.Write("-");  // Frame 2
@@ -152,7 +160,5 @@ class Activity
             Thread.Sleep(200);
             Console.Write("\b"); // Move cursor back
         }
-        
-
     }
 }
