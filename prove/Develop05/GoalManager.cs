@@ -134,7 +134,7 @@ class GoalManager
                 break;
         }
     }
-    public void RecordEvent()
+    public void RecordEvent()//abstract?
     {
 
     }

@@ -22,7 +22,7 @@ class ChecklistGoal : Goal
         return true;//fix this later
 
     }
-    public string GetDetailsString()
+    public string GetDetailsString()//default implementation only overriden by chercklistgoal
     {
         return string.Empty;
 

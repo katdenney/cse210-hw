@@ -26,7 +26,7 @@ class Goal
     }
     public string GetDetailsString()
     {
-        return string.Empty;
+        return $"{_shortName}{_description}{_points}";
 
     }
     public string GetStringRepresentation()
