@@ -3,7 +3,7 @@ using System;
 public class Square 
 :Shapes
 {
-    private int _side;
+    private int _side = 0;
 
     public int GetSide()
     {
@@ -20,7 +20,7 @@ public class Square
     {
         _side = side;
     }
-    public override int GetArea()
+    public override double GetArea()
     {  
         int area ;
         area = _side * _side; 
