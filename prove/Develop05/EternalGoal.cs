@@ -19,7 +19,7 @@ class EternalGoal : Goal
     }
     public string GetStringRepresentation()
     {
-        return string.Empty;
+        return $"{base.GetName}{base.GetDescription}{base.GetPoints}";
 
     }
 

@@ -7,23 +7,22 @@ class SimpleGoal : Goal
     public SimpleGoal(string name, string description, int points)
     : base (name, description, points)
     {
-        //nothing new to initialize
+        _isComplete = false;
     }
 
     public void RecordEvent()
     {
-
+        _isComplete = true;
     }
-    public bool IsComplete()
+    public override bool IsComplete()
     {
-        return true;//fix this later
+        return _isComplete;
 
     }
     public string GetStringRepresentation()
     {
-        return string.Empty;
+        return $"{base.GetName}, {base.GetDescription}, {base.GetPoints}";
 
     }
 
-
-}
+    }

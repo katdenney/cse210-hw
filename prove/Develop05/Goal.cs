@@ -14,16 +14,27 @@ class Goal
         _points = points;
 
     }
-
+    public string GetName()
+    {
+        return _shortName;
+    }
+    public string GetDescription()
+    {
+        return _description;
+    }
+    public int GetPoints()
+    {
+        return _points;
+    }
     public void RecordEvent()
     {
 
     }
-    public bool IsComplete()
+    public virtual bool IsComplete()
     {
-        return true;//fix this later
-
+        return true;
     }
+
     public string GetDetailsString()
     {
         return $"{_shortName}{_description}{_points}";
@@ -31,7 +42,7 @@ class Goal
     }
     public string GetStringRepresentation()
     {
-        return string.Empty;
+        return $"{_shortName}{_description}{_points}";
 
     }
 
