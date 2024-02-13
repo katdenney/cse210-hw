@@ -45,7 +45,7 @@ class Goal
         return $"{_shortName}{_description}{_points}";
 
     }
-    public string GetStringRepresentation()
+    public virtual string GetStringRepresentation()
     {
         return $"{_shortName}{_description}{_points}";
 

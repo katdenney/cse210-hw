@@ -17,7 +17,7 @@ class EternalGoal : Goal
         return true;//fix this later
 
     }
-    public string GetStringRepresentation()
+    public override string GetStringRepresentation()
     {
         return $"{base.GetName}{base.GetDescription}{base.GetPoints}";
 

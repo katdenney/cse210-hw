@@ -27,9 +27,9 @@ class ChecklistGoal : Goal
         return string.Empty;
 
     }
-    public string GetStringRepresentation()
+    public override string GetStringRepresentation()
     {
-        return $"{base.GetName}{base.GetDescription}{base.GetPoints}";
+        return $"{base.GetStringRepresentation()}, Target: {_target}, Bonus: {_bonus}";
 
     }
 

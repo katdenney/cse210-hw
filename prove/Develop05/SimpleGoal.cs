@@ -19,9 +19,9 @@ class SimpleGoal : Goal
         return _isComplete;
 
     }
-    public string GetStringRepresentation()
+    public override string GetStringRepresentation()
     {
-        return $"simple, {base.GetName}, {base.GetDescription}, {base.GetPoints}";
+        return $"(simple class){base.GetStringRepresentation()}, Complete: {_isComplete}";
 
     }
     public override int GetScore()
