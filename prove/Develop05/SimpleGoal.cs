@@ -21,8 +21,12 @@ class SimpleGoal : Goal
     }
     public string GetStringRepresentation()
     {
-        return $"{base.GetName}, {base.GetDescription}, {base.GetPoints}";
+        return $"simple, {base.GetName}, {base.GetDescription}, {base.GetPoints}";
 
     }
-
+    public override int GetScore()
+    {
+        return base.GetPoints();
     }
+
+}

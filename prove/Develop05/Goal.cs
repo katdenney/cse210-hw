@@ -35,6 +35,11 @@ class Goal
         return true;
     }
 
+    public virtual int GetScore()
+    {
+        return 0;
+    }
+
     public string GetDetailsString()
     {
         return $"{_shortName}{_description}{_points}";

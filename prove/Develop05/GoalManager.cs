@@ -1,19 +1,11 @@
 using System;
+using System.ComponentModel;
 using System.IO;
 class GoalManager 
 {
     private List <Goal> _goalList = new List<Goal>();
-    /*private string _goalsFileName = "goals1.txt";
-    string[] lines = System.IO.File.ReadAllLines("goals1.txt");
-
-    foreach (string line in lines)
-    {
-        string[] parts = line.Split(",");
-        string[] name = parts[0];
-        string[] description = parts[1];
-    }*/
-    private int _goalCount;
-    private int _score = 0;
+    
+    private int _score = 0; // maybe this should be a function that adds up all the complete goals
     private string _mainMenuString = """
         Menu Options:
             1. Create New Goal
@@ -25,12 +17,9 @@ class GoalManager
         Select a choice from the menu:
         """;
 
-
-    public GoalManager(int score)
+    public GoalManager() //total score of all Goals in the List
     {
-        _score = score;
-       // _goalList = System.IO.File.ReadAllLines(goals1.txt);
-       // _goalCount = _goalList.Length;
+        _score = 0;
     }
     public void Start()
     {
@@ -112,19 +101,16 @@ class GoalManager
         
         switch(kind){
             case "simple": 
-                Console.WriteLine("What is the name of your goal");
-                string sName = Console.ReadLine();
-                Console.WriteLine($"{sName}");
+                Goal simpleGoal = new SimpleGoal(name, desc, pointsInt);  
+                _goalList.Add(simpleGoal);              
                 break;
             case "eternal":
-                Console.WriteLine("What is the name of your goal");
-                string eName = Console.ReadLine();
-                Console.WriteLine($"{eName}");
+                Goal eternalGoal = new EternalGoal(name, desc, pointsInt);  
+                _goalList.Add(eternalGoal);
                 break;
             case "checklist":
-                Console.WriteLine("What is the name of your goal");
-                string cName = Console.ReadLine();
-                Console.WriteLine($"{cName}");
+                Goal checklistGoal = new EternalGoal(name, desc, pointsInt);  
+                _goalList.Add(checklistGoal);
                 break;
             default:
                 Console.WriteLine("Hey! You entered and incorrect option!");
@@ -165,7 +151,7 @@ class GoalManager
 
     }
     
-    public void RecordEvent()//abstract?
+    public void RecordEvent()
     {
 
     }
@@ -208,5 +194,25 @@ class GoalManager
 
     }
     
+    public static void LoadGoalsFromFile(string filename){
 
+        /*private string _goalsFileName = "goals1.txt";
+        string[] lines = System.IO.File.ReadAllLines("goals1.txt");
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split(",");
+            string[] name = parts[0];
+            string[] description = parts[1];
+        }*/
+    }
+
+    public int  GetTotalScore(){
+        int totalScore = 0;
+        foreach(Goal goal in _goalList){
+            int score = goal.GetScore();
+            totalScore += score;
+        }
+        return totalScore;
+    }
 }
