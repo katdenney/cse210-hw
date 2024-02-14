@@ -108,10 +108,17 @@ class GoalManager
                 _goalList.Add(simpleGoal);              
                 break;
             case "eternal":
-                Goal eternalGoal = new EternalGoal(name, desc, pointsInt, count); 
+                Goal eternalGoal = new EternalGoal(name, desc, pointsInt); 
                 _goalList.Add(eternalGoal);
                 break;
             case "checklist":
+                Console.WriteLine("Enter how many times would you like to acomplish this goal?");
+                string userData = Console.ReadLine();
+                int target = int.Parse(userData);
+                Console.WriteLine($"What is the bonus point reward once it is completed {target} times?");
+                userData = Console.ReadLine();
+                int bonus = int.Parse(userData);
+                int count = 0; //Yegor helped me here and said we create a new goal, so there will be 0 completed goals at the start
                 Goal checklistGoal = new ChecklistGoal(name, desc, pointsInt, target, bonus, count);  
                 _goalList.Add(checklistGoal);
                 break;

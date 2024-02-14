@@ -3,12 +3,9 @@ using static Constants;
 
 class EternalGoal : Goal
 {
-    private int _count;
-     public EternalGoal(string name, string description, int points, int count)
+     public EternalGoal(string name, string description, int points)
     : base (name, description, points)
-    {
-        _count = count;
-    }
+    {}
 
     public void RecordEvent()
     {
