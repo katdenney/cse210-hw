@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using static Constants;
 
 class Goal
 {
@@ -47,8 +48,7 @@ class Goal
     }
     public virtual string GetStringRepresentation()
     {
-        return $"{_shortName}{_description}{_points}";
-
+        return $"goal{delimiter+_shortName+delimiter+_description+delimiter+_points}";
     }
 
 }

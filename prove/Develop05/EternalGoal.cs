@@ -1,26 +1,27 @@
 using System;
+using static Constants;
 
 class EternalGoal : Goal
 {
-     public EternalGoal(string name, string description, int points)
+    private int _count;
+     public EternalGoal(string name, string description, int points, int count)
     : base (name, description, points)
     {
-        //nothing new to initialize
+        _count = count;
     }
 
     public void RecordEvent()
     {
-
+        
     }
     public bool IsComplete()
     {
-        return true;//fix this later
+        return false;
 
     }
     public override string GetStringRepresentation()
     {
-        return $"{base.GetName}{base.GetDescription}{base.GetPoints}";
-
+        return $"eternal{delimiter+base.GetName()+delimiter+base.GetDescription()+delimiter+base.GetPoints()}";
     }
 
 }

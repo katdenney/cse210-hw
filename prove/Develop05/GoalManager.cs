@@ -2,12 +2,13 @@ using System;
 using System.ComponentModel;
 using System.IO;
 using System.IO.Enumeration;
+using System.Reflection.Metadata;
+using static Constants;
 class GoalManager 
 {
     private List <Goal> _goalList = new List<Goal>();
-
     
-    private int _score = 0; // maybe this should be a function that adds up all the complete goals
+    //private int _score = 0; //this is now a function that adds up all the points 
     private string _mainMenuString = """
         Menu Options:
             1. Create New Goal
@@ -19,10 +20,8 @@ class GoalManager
         Select a choice from the menu:
         """;
 
-    public GoalManager() //total score of all Goals in the List
-    {
-        _score = 0;
-    }
+    public GoalManager() {} //total score of all Goals in the List
+    
     public void Start()
     {
         bool exit = false;
@@ -62,14 +61,13 @@ class GoalManager
 
     private void ShowCreateNewGoalsMenu()
     {
-        String menu =
-        @"
-            The Types of Goals are:
+        String menu ="""
+        The Types of Goals are:
               1. Simple Goal
               2. Eternal Goal
               3. Checklist Goal
-            Which type of goal would you like to create?
-        ";
+        Which type of goal would you like to create?
+        """;
         
         Console.WriteLine(menu);
         int choice = int.Parse(Console.ReadLine());
@@ -90,7 +88,7 @@ class GoalManager
         }
     }
     public void CreateGoal(string kind)   //switch statment to create "kind" of goal
-    { 
+    {
         Console.WriteLine($"Building a goal {kind}.");
         Console.WriteLine($"Enter a short name for this Goal.");
         string name = Console.ReadLine();
@@ -110,11 +108,11 @@ class GoalManager
                 _goalList.Add(simpleGoal);              
                 break;
             case "eternal":
-                Goal eternalGoal = new EternalGoal(name, desc, pointsInt);  
+                Goal eternalGoal = new EternalGoal(name, desc, pointsInt, count); 
                 _goalList.Add(eternalGoal);
                 break;
             case "checklist":
-                Goal checklistGoal = new EternalGoal(name, desc, pointsInt);  
+                Goal checklistGoal = new ChecklistGoal(name, desc, pointsInt, target, bonus, count);  
                 _goalList.Add(checklistGoal);
                 break;
             default:
@@ -158,8 +156,9 @@ class GoalManager
     }
     public void SaveGoalsToFile(string fileName)
     { 
-        Console.WriteLine("Saving to file...");
-        fileName += ".txt";
+        if(fileName.IndexOf(".txt") == -1)
+            fileName += ".txt";
+        Console.WriteLine($"Saving to file...{fileName}");
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {
             foreach (Goal goal in _goalList)
@@ -177,6 +176,8 @@ class GoalManager
      private void ShowRecordEventMenu()
     {
         Console.WriteLine("ShowRecordEventMenu");
+        //print "Which Goal have you compleated?"
+        //print list of goals and ask for user input for the number of the goal compleated.
     }
     public void DisplayPlayerInfo()//ex. 1.[ ] goal,discription 
     {
@@ -191,24 +192,6 @@ class GoalManager
     {
 
     }
-    /*public void LoadGoals()
-    {  
-        Console.WriteLine("Enter a file to read from:");
-        string fileName = Console.ReadLine();
-        fileName += ".txt";
-
-        _goalList = new List<Goal>();
-        string[] lines = System.IO.File.ReadAllLines(fileName);
-        foreach (string line in lines)
-        {
-            string[] parts = line.Split(':');
-            //new Entry object and adding that data to _goal list
-            //Console.WriteLine($"{parts[0]} and {parts[1]}");
-            Goal g = new Goal(parts[1], parts[2], parts[3]);
-            _goals.Add(g);
-        }
-        Console.WriteLine("Finished loading the data.");
-    }*/
     public void LoadGoalsFromFile(string fileName)
     {
         _goalList.Clear();
@@ -217,7 +200,7 @@ class GoalManager
             string[] lines = System.IO.File.ReadAllLines(fileName);
             foreach (string line in lines)
             {
-                string[] parts = line.Split(':');
+                string[] parts = line.Split(delimiter);
                 if (parts.Length >=3)
                 {
                     string name = parts[1].Trim();
@@ -245,12 +228,13 @@ class GoalManager
             string[] description = parts[1];
         }*/
     }
-    public int  GetTotalScore(){
+    public int  GetTotalScore()
+    {
         int totalScore = 0;
         foreach(Goal goal in _goalList)
         {
-            int score = goal.GetScore();
-            totalScore += score;
+            int _score = goal.GetScore();
+            totalScore += _score;
         }
         return totalScore;
     }

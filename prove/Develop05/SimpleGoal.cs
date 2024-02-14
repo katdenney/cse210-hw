@@ -1,4 +1,5 @@
 using System;
+using static Constants;
 
 class SimpleGoal : Goal
 {
@@ -21,7 +22,7 @@ class SimpleGoal : Goal
     }
     public override string GetStringRepresentation()
     {
-        return $"(simple class){base.GetStringRepresentation()}, Complete: {_isComplete}";
+        return $"simple{delimiter+base.GetStringRepresentation()+delimiter+_isComplete}";
 
     }
     public override int GetScore()
