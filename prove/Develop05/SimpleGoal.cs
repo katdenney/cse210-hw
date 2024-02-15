@@ -3,34 +3,34 @@ using static Constants;
 
 class SimpleGoal : Goal
 {
-    private bool _isComplete;
-
-    public SimpleGoal(string name, string description, int points)
-    : base (name, description, points)
-    {
-        _isComplete = false;
-    }
+    public SimpleGoal(string name, string description, int points, int score)
+    : base (name, description, points, score)
+    {}
     //constructor that uses StreamReader for the LoadToFile
     public SimpleGoal(StreamReader read) :base(read)
     {}
 
     public void RecordEvent()
     {
-        _isComplete = true;
+        
     }
-    public override bool IsComplete()
+    public override bool IsComplete()//come back to this!!!!//This is where im stopping for now 9pm
     {
-        return _isComplete;
-
+        if (!base._isCompleted)
+        {
+            return true;
+            base._score += base._pointsForCompletion;
+        }
+        
     }
     public override string GetStringRepresentation()
     {
-        return $"simple{delimiter+base.GetStringRepresentation()+delimiter+_isComplete}";
+        return $"simple{delimiter+base.GetStringRepresentation()}";
 
     }
     public override int GetScore()
     {
-        return base.GetPoints();
+        return base.GetPointsForCompletion();
     }
 
 }

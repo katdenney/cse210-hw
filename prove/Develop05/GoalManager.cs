@@ -33,16 +33,16 @@ class GoalManager
             switch(choice)
             {
                 case 1: 
-                    ShowCreateNewGoalsMenu();
+                    ShowCreateNewGoalsMenu();//this works and creates a goal
                     break;
                 case 2:
-                    ListGoalNames();
+                    DisplayPlayerInfo();
                     break;
                 case 3:
-                    ShowSaveGoalsMenu();
+                    ShowSaveGoalsMenu();//this works and saves goals
                     break;
                 case 4:
-                    ShowLoadGoalsMenu();
+                    ShowLoadGoalsMenu();//this works and loads goals 
                     break;
                 case 5:
                     ShowRecordEventMenu();
@@ -59,7 +59,7 @@ class GoalManager
         }
     }
 
-    private void ShowCreateNewGoalsMenu()
+    private void ShowCreateNewGoalsMenu()//this might need work. 
     {
         String menu ="""
         The Types of Goals are:
@@ -88,7 +88,8 @@ class GoalManager
         }
     }
     public void CreateGoal(string kind)   //switch statment to create "kind" of goal
-    {
+    {   //get score 
+        int score = GetTotalScore();
         Console.WriteLine($"Building a {kind} goal.");
         Console.WriteLine($"Enter a short name for this Goal.");
         string name = Console.ReadLine();
@@ -104,7 +105,7 @@ class GoalManager
         switch(kind)
         {
             case "simple": 
-                Goal simpleGoal = new SimpleGoal(name, desc, pointsInt);  
+                Goal simpleGoal = new SimpleGoal(name, desc, pointsInt,score);  
                 _goalList.Add(simpleGoal);              
                 break;
             case "eternal":
@@ -132,7 +133,7 @@ class GoalManager
 
         }
     }
-    public void ListGoalNames()
+    public void ListGoalNames()//not using this right now
     {
         string nameList = "";
         foreach (Goal goal in _goalList)
@@ -155,15 +156,15 @@ class GoalManager
         }
         // Console.writeLine(descriptionsList);
     }
-    private void ShowSaveGoalsMenu()
+    private void ShowSaveGoalsMenu()//this is working now
     {
         Console.WriteLine("Enter a filename to save goals:");
         string fileName = Console.ReadLine();
         SaveGoalsToFile(fileName);
     }
-    public void SaveGoalsToFile(string fileName)
+    public void SaveGoalsToFile(string fileName)//this is working now
     { 
-        if(fileName.IndexOf(".txt") == -1)
+        if(fileName.EndsWith(".txt"))
             fileName += ".txt";
         Console.WriteLine($"Saving to file...{fileName}");
         using (StreamWriter outputFile = new StreamWriter(fileName))
@@ -174,20 +175,18 @@ class GoalManager
             }
         }
     }
-    private void ShowLoadGoalsMenu()
+    private void ShowLoadGoalsMenu()//this is working now
     {
         Console.WriteLine("Enter a txt filename to load goals from:");
         string fileName = Console.ReadLine();
-        if(fileName.IndexOf(".txt") == -1)
+        if(!fileName.EndsWith(".txt"))
         {
-            _goalList.Clear();
-            LoadGoalsFromFile(fileName);
+            fileName += ".txt";
         }
-        else fileName += ".txt";
         _goalList.Clear();
         LoadGoalsFromFile(fileName); 
     }
-    public void LoadGoalsFromFile(string fileName)//this section is pretty closely coppied from instructor I need to go back though after I have better understanding and change things. 
+    public void LoadGoalsFromFile(string fileName)//this is working now
     {
         using (StreamReader reader = new StreamReader(fileName))
         {
@@ -226,32 +225,43 @@ class GoalManager
         //print "Which Goal have you compleated?"
         //print list of goals and ask for user input for the number of the goal compleated.
     }
-    public void DisplayPlayerInfo()//ex. 1.[ ] goal,discription 
-    {
-
-
-    }
-    public void ListGoalDetails(Goal goal)
-    { 
-        Console.WriteLine($"{goal}Goal:{goal.GetName()}, {goal.GetDescription()}:{goal.GetPoints()}"); 
-    }
     public void RecordEvent()
     {
 
     }
-    
-
-        /*private string _goalsFileName = "goals1.txt";
-        string[] lines = System.IO.File.ReadAllLines("goals1.txt");
-
-        foreach (string line in lines)
+    public bool CheckForGoalsToRecord()
+    {
+        foreach (Goal goal in _goalList)
         {
-            string[] parts = line.Split(",");
-            string[] name = parts[0];
-            string[] description = parts[1];
-        }*/
-    
-    public int  GetTotalScore()
+            if (!goal.IsComplete())
+                return true;
+        }
+        return false;
+    }
+    public void DisplayPlayerInfo() 
+    {
+        int score = GetTotalScore();
+        Console.Clear();
+        if (_goalList.Count >0)
+        {
+            Console.WriteLine("The goals are:");
+            foreach (Goal goal in _goalList)
+            {
+                Console.WriteLine(goal.GetDetailsString());
+                score += goal.GetPointsForCompleation();
+            }
+        }
+        else
+        {
+            Console.WriteLine("No goals created or loaded");
+        }
+        Console.WriteLine($"You have {score} points.");
+    }
+    public void ListGoalDetails(Goal goal)
+    { 
+        Console.WriteLine($"{goal}Goal:{goal.GetName()}, {goal.GetDescription()}:{goal.GetPointsForCompleation()}"); 
+    }  
+    public int GetTotalScore()
     {
         int totalScore = 0;
         foreach(Goal goal in _goalList)

@@ -3,8 +3,8 @@ using static Constants;
 
 class EternalGoal : Goal
 {
-    public EternalGoal(string name, string description, int points)
-    : base (name, description, points)
+    public EternalGoal(string name, string description, int points, int score)
+    : base (name, description, points, score)
     {}
     public EternalGoal(StreamReader read) 
     : base(read)
