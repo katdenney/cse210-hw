@@ -1,20 +1,29 @@
 using System;
+using System.Runtime.CompilerServices;
 using static Constants;
 
 class ChecklistGoal : Goal
 {
-    private int _amountCompleted;
     private int _target;
+    private int _amountCompleted;
     private int _bonus;
 
 
-     public ChecklistGoal(string name, string description, int points, int target, int bonus, int count)
+    public ChecklistGoal(string name, string description, int points, int target, int bonus, int count)
     : base (name, description, points)
     {
         _target = target;
         _bonus = bonus;
         _amountCompleted = count;
     }
+    public ChecklistGoal(StreamReader read)
+    : base(read)
+    {
+        _target = int.Parse(read.ReadLine());
+        _amountCompleted = int.Parse(read.ReadLine());
+        _bonus = int.Parse(read.ReadLine());  
+    }
+
 
     public void RecordEvent()
     {

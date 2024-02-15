@@ -15,6 +15,12 @@ class Goal
         _points = points;
 
     }
+    public Goal(StreamReader read)
+    {
+        _shortName = read.ReadLine();
+        _description = read.ReadLine();
+        //_pointsForEachCompleation = int.Parse(read.ReadLine());
+    }
     public string GetName()
     {
         return _shortName;

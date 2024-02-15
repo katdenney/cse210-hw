@@ -89,7 +89,7 @@ class GoalManager
     }
     public void CreateGoal(string kind)   //switch statment to create "kind" of goal
     {
-        Console.WriteLine($"Building a goal {kind}.");
+        Console.WriteLine($"Building a {kind} goal.");
         Console.WriteLine($"Enter a short name for this Goal.");
         string name = Console.ReadLine();
         //Console.WriteLine($"{name}");
@@ -178,7 +178,47 @@ class GoalManager
     {
         Console.WriteLine("Enter a txt filename to load goals from:");
         string fileName = Console.ReadLine();
-        LoadGoalsFromFile(fileName);
+        if(fileName.IndexOf(".txt") == -1)
+        {
+            _goalList.Clear();
+            LoadGoalsFromFile(fileName);
+        }
+        else fileName += ".txt";
+        _goalList.Clear();
+        LoadGoalsFromFile(fileName); 
+    }
+    public void LoadGoalsFromFile(string fileName)//this section is pretty closely coppied from instructor I need to go back though after I have better understanding and change things. 
+    {
+        using (StreamReader reader = new StreamReader(fileName))
+        {
+            while(!reader.EndOfStream)
+            try
+            {
+                string kindLine = reader.ReadLine();
+                switch (kindLine)
+                {
+                    case "Goal.SimpleGoal":
+                        _goalList.Add(new SimpleGoal(reader));
+                        break;
+                    case "GoalTracker.ChecklistGoal":
+                        _goalList.Add(new ChecklistGoal(reader));
+                        break;
+                    case "GoalTracker.EternalGoal":
+                        _goalList.Add(new EternalGoal(reader));
+                        break;
+                    default:
+                        new Exception("Unknown type found in file");
+                        break;
+                    
+                    
+                }
+                Console.WriteLine("Finished loading the data.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading goals: {ex.Message}");
+            }
+        }
     }
      private void ShowRecordEventMenu()
     {
@@ -199,31 +239,7 @@ class GoalManager
     {
 
     }
-    public void LoadGoalsFromFile(string fileName)
-    {
-        _goalList.Clear();
-        try
-        {
-            string[] lines = System.IO.File.ReadAllLines(fileName);
-            foreach (string line in lines)
-            {
-                string[] parts = line.Split(delimiter);
-                if (parts.Length >=3)
-                {
-                    string name = parts[1].Trim();
-                    string desc = parts[2].Trim();
-                    int points = int.Parse(parts[3].Trim());
-
-                    Goal goal = new SimpleGoal(name, desc, points);
-                    _goalList.Add(goal);
-                }
-            }
-            Console.WriteLine("Finished loading the data.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error loading goals: {ex.Message}");
-        }
+    
 
         /*private string _goalsFileName = "goals1.txt";
         string[] lines = System.IO.File.ReadAllLines("goals1.txt");
@@ -234,7 +250,7 @@ class GoalManager
             string[] name = parts[0];
             string[] description = parts[1];
         }*/
-    }
+    
     public int  GetTotalScore()
     {
         int totalScore = 0;

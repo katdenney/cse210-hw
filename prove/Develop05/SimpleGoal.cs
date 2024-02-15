@@ -10,6 +10,9 @@ class SimpleGoal : Goal
     {
         _isComplete = false;
     }
+    //constructor that uses StreamReader for the LoadToFile
+    public SimpleGoal(StreamReader read) :base(read)
+    {}
 
     public void RecordEvent()
     {
