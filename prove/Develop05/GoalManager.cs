@@ -8,7 +8,7 @@ class GoalManager
 {
     private List <Goal> _goalList = new List<Goal>();
     
-    //private int _score = 0; //this is now a function that adds up all the points 
+    private int _score = 0; //this is now a function that adds up all the points 
     private string _mainMenuString = """
         Menu Options:
             1. Create New Goal
@@ -20,7 +20,9 @@ class GoalManager
         Select a choice from the menu:
         """;
 
-    public GoalManager() {} //total score of all Goals in the List
+    public GoalManager() {
+        _score = 0;
+    } //total score of all Goals in the List
     
     public void Start()
     {
@@ -68,23 +70,36 @@ class GoalManager
               3. Checklist Goal
         Which type of goal would you like to create?
         """;
-        
-        Console.WriteLine(menu);
-        int choice = int.Parse(Console.ReadLine());
-        switch(choice)
+        int choice;
+        while(true)
         {
-            case 1: 
-                CreateGoal("simple");
+            Console.WriteLine(menu);
+        
+            string userInput = Console.ReadLine();
+            if (int.TryParse(userInput, out choice))
+            {
+                switch(choice)
+                {
+                    case 1: 
+                        CreateGoal("simple");
+                        break;
+                    case 2:
+                        CreateGoal("eternal");
+                        break;
+                    case 3:
+                        CreateGoal("checklist");
+                        break;
+                    default:
+                        Console.WriteLine("Hey! You entered an incorrect option!");
+                        break;
+                }
                 break;
-            case 2:
-                CreateGoal("eternal");
-                break;
-            case 3:
-                CreateGoal("checklist");
-                break;
-            default:
-                Console.WriteLine("Hey! You entered an incorrect option!");
-                break;
+            }
+            else
+            {
+                Console.WriteLine("Error, Try again. Please Enter an Integer choice.");
+
+            }
         }
     }
     public void CreateGoal(string kind)   //switch statment to create "kind" of goal
@@ -105,7 +120,7 @@ class GoalManager
         switch(kind)
         {
             case "simple": 
-                Goal simpleGoal = new SimpleGoal(name, desc, pointsInt,score);  
+                Goal simpleGoal = new SimpleGoal(name, desc, pointsInt);  
                 _goalList.Add(simpleGoal);              
                 break;
             case "eternal":
@@ -145,7 +160,7 @@ class GoalManager
         // Console.writeLine(nameList);
     }
 
-    public void ListGoalDescriptions()
+    public void ListGoalDescriptions()//not using this right now
     {
         string descriptionsList = "";
         foreach (Goal goal in _goalList)
@@ -240,7 +255,7 @@ class GoalManager
     }
     public void DisplayPlayerInfo() 
     {
-        int score = GetTotalScore();
+        int totalScore = 0;//changed from score //changed this from = GetTotalScore();
         Console.Clear();
         if (_goalList.Count >0)
         {
@@ -248,26 +263,32 @@ class GoalManager
             foreach (Goal goal in _goalList)
             {
                 Console.WriteLine(goal.GetDetailsString());
-                score += goal.GetPointsForCompleation();
+                if (goal.IsComplete())
+                {
+                    Console.WriteLine(goal.GetDetailsString());//can take this out later
+                    totalScore += goal.GetPointsForCompletion();
+                    
+                }
+                
             }
         }
         else
         {
             Console.WriteLine("No goals created or loaded");
         }
-        Console.WriteLine($"You have {score} points.");
+        Console.WriteLine($"You have {totalScore} points.");
     }
     public void ListGoalDetails(Goal goal)
     { 
-        Console.WriteLine($"{goal}Goal:{goal.GetName()}, {goal.GetDescription()}:{goal.GetPointsForCompleation()}"); 
+        Console.WriteLine($"{goal}Goal:{goal.GetName()}, {goal.GetDescription()}"); 
     }  
     public int GetTotalScore()
     {
         int totalScore = 0;
         foreach(Goal goal in _goalList)
         {
-            int _score = goal.GetScore();
-            totalScore += _score;
+            if (goal.IsComplete())
+            totalScore += goal.GetPointsForCompletion();
         }
         return totalScore;
     }

@@ -1,1 +1,0 @@
-simple~goal~dishes~do the dishes that are in the sink~30~False
