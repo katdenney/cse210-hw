@@ -25,9 +25,11 @@ class ChecklistGoal : Goal
     }
 
 
-    public void RecordEvent()
+    public override void RecordEvent()
     {
         _amountCompleted += 1;
+        if(_target == _amountCompleted)
+            _isCompleted = true;
     }
     public override bool IsComplete()
     {
@@ -42,16 +44,24 @@ class ChecklistGoal : Goal
     {
         return _amountCompleted;
     }
-    public string GetDetailsString()//default implementation only overriden by chercklistgoal
+    public override string GetDetailsString()//default implementation only overriden by chercklistgoal
     {
-        return string.Empty;
-
+        return $"{base.GetDetailsString()}, {_amountCompleted}/{_target}, {_bonus}";
     }
     public override string GetStringRepresentation()
     {
-        return $"checklist{delimiter+ base.GetStringRepresentation()+delimiter+_target+delimiter+_bonus}";
+        return $"checklist{delimiter+base.GetStringRepresentation()+delimiter+_target+delimiter+_amountCompleted+delimiter+_bonus}";
     }
 
-
-
+    public override int GetScore()
+    {
+        int score = 0;
+        if(_target == _amountCompleted)
+        {
+            score += _bonus;
+        }
+        score += _pointsForCompletion * _amountCompleted;
+        return score;
+    }
 }
+
