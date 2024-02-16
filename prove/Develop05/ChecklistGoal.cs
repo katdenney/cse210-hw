@@ -38,7 +38,7 @@ class ChecklistGoal : Goal
             return true;
         }
         else return false;
-        //return _target == _amountCompleted; see if this works instead after everything is done
+        //return _target == _amountCompleted; this works as well
     }
     public int GetAmountCompleted()
     {

@@ -197,7 +197,7 @@ class GoalManager
         _goalList.Clear();
         LoadGoalsFromFile(fileName); 
     }
-    public void LoadGoalsFromFile(string fileName)//this is not totally working it needs to tack on txt if not found in input.
+    public void LoadGoalsFromFile(string fileName)
     {
         using (StreamReader reader = new StreamReader(fileName))
         {
@@ -269,29 +269,6 @@ class GoalManager
         return index -1;
 
     }
-    // public Goal GetEventToRecord(int indexToSelect)
-    // {
-    //     int index = 1;
-    //     foreach(Goal goal in _goalList)
-    //     {
-    //         if (!goal.IsComplete())
-    //         {
-    //             if(index == indexToSelect)
-    //                 return goal;
-    //             index++;
-    //         }
-    //     }
-    //     return null;
-    // }
-    // public bool CheckForGoalsToRecord()//unneeded
-    // {
-    //     foreach (Goal goal in _goalList)
-    //     {
-    //         if (!goal.IsComplete())
-    //             return true;
-    //     }
-    //     return false;
-    // }
     public void BuildListOfRecordableGoals()
     {
         _recordableGoalList = new List<Goal>();
