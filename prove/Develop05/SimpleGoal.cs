@@ -7,7 +7,7 @@ class SimpleGoal : Goal
     : base (name, description, points)
     {}
     //constructor that uses StreamReader for the LoadToFile
-    public SimpleGoal(StreamReader read) :base(read)
+    public SimpleGoal(string[] line) :base(line)
     {}
 
     public void RecordEvent()
@@ -19,7 +19,6 @@ class SimpleGoal : Goal
         if (!_isCompleted)
         {
             _isCompleted = true;
-            _score += _pointsForCompletion;
         }
         return _isCompleted;
     }

@@ -16,12 +16,12 @@ class ChecklistGoal : Goal
         _bonus = bonus;
         _amountCompleted = count;
     }
-    public ChecklistGoal(StreamReader read)
-    : base(read)
+    public ChecklistGoal(string[] baseData, string[] data)
+    : base(baseData)
     {
-        _target = int.Parse(read.ReadLine());
-        _amountCompleted = int.Parse(read.ReadLine());
-        _bonus = int.Parse(read.ReadLine());  
+        _target = int.Parse(data[0]);
+        _amountCompleted = int.Parse(data[1]);
+        _bonus = int.Parse(data[2]);  
     }
 
 
@@ -29,7 +29,7 @@ class ChecklistGoal : Goal
     {
         _amountCompleted += 1;
     }
-    public bool IsComplete()
+    public override bool IsComplete()
     {
         if (_target == _amountCompleted)
         {
