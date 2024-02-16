@@ -56,5 +56,6 @@ class Goal
     {
         return _isCompleted?_pointsForCompletion:0;
     }
+    //https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator
 
 }

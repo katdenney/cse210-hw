@@ -6,7 +6,7 @@ class SimpleGoal : Goal
     public SimpleGoal(string name, string description, int points)
     : base (name, description, points)
     {}
-    //constructor that uses StreamReader for the LoadToFile
+    
     public SimpleGoal(string[] baseData) :base(baseData)
     {}
 

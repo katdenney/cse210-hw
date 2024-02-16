@@ -44,7 +44,7 @@ class ChecklistGoal : Goal
     {
         return _amountCompleted;
     }
-    public override string GetDetailsString()//default implementation only overriden by chercklistgoal
+    public override string GetDetailsString()//default implementation only overriden by checklistgoal
     {
         return $"{base.GetDetailsString()}, {_amountCompleted}/{_target}, {_bonus}";
     }

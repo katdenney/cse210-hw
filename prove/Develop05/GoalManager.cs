@@ -290,6 +290,7 @@ class GoalManager
     }
     public void DisplayPlayerInfo() 
     {
+        DisplayScore();
         if (_goalList.Count >0)
         {
             DisplayGoalList(_goalList);
@@ -298,7 +299,6 @@ class GoalManager
         {
             Console.WriteLine("No goals created or loaded");
         }
-        Console.WriteLine($"You have {GetTotalScore()} points.");
     }
     public void ListGoalDetails(Goal goal)
     { 
@@ -312,5 +312,9 @@ class GoalManager
             totalScore += goal.GetScore();
         }
         return totalScore;
+    }
+    public void DisplayScore()
+    {
+        Console.WriteLine($"You have {GetTotalScore()} points.");
     }
 }
