@@ -7,25 +7,29 @@ class SimpleGoal : Goal
     : base (name, description, points)
     {}
     //constructor that uses StreamReader for the LoadToFile
-    public SimpleGoal(string[] line) :base(line)
+    public SimpleGoal(string[] baseData) :base(baseData)
     {}
 
-    public void RecordEvent()
+    public override void RecordEvent() 
     {
-        
-    }
-    public override bool IsComplete()//come back to this!!!!//This is where im stopping for now 9pm
-    {
-        if (!_isCompleted)
+        if(!_isCompleted)
         {
             _isCompleted = true;
         }
+    }
+    public override bool IsComplete()
+    {
         return _isCompleted;
     }
     public override string GetStringRepresentation()
     {
         return $"simple{delimiter+base.GetStringRepresentation()}";
 
+    }
+
+    public override int GetScore()
+    {
+        return base.GetScore();
     }
 
 }

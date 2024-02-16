@@ -7,9 +7,9 @@ using static Constants;
 class GoalManager 
 {
     private List <Goal> _goalList = new List<Goal>();
-    
-    private int _score = 0; //this is not needed? 
+    private List <Goal> _recordableGoalList;
     private string _mainMenuString = """
+        ******************************
         Menu Options:
             1. Create New Goal
             2. List Goals
@@ -20,13 +20,10 @@ class GoalManager
         Select a choice from the menu:
         """;
 
-    public GoalManager() 
-    {
-        _score = 0;
-    } //total score of all Goals in the List
-    
+    public GoalManager(){}     
     public void Start()
     {
+        Console.Clear();
         bool exit = false;
         int choice;
         while (!exit)
@@ -103,8 +100,7 @@ class GoalManager
         }
     }
     public void CreateGoal(string kind)   //switch statment to create "kind" of goal
-    {   //get score 
-        int score = GetTotalScore();
+    {   
         Console.WriteLine($"Building a {kind} goal.");
         Console.WriteLine($"Enter a short name for this Goal.");
         string name = Console.ReadLine();
@@ -142,11 +138,11 @@ class GoalManager
                 Console.WriteLine("Hey! You entered an incorrect option!");
                 break;
         }
-        foreach (Goal goal in _goalList)
-        {
-            Console.WriteLine($"{kind}goal: {name}, {desc} points:{pointsInt}");
+        // foreach (Goal goal in _goalList)
+        // {
+        //     Console.WriteLine($"{kind}goal: {name}, {desc} points:{pointsInt}");
 
-        }
+        // }
     }
     public void ListGoalNames()//not using this right now
     {
@@ -179,8 +175,8 @@ class GoalManager
     }
     public void SaveGoalsToFile(string fileName)//this is working now
     { 
-        if(fileName.EndsWith(".txt"))
-            fileName += ".txt";
+        // if(fileName.EndsWith(".txt"))
+        //     fileName += ".txt";
         Console.WriteLine($"Saving to file...{fileName}");
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {
@@ -194,10 +190,10 @@ class GoalManager
     {
         Console.WriteLine("Enter a txt filename to load goals from:");
         string fileName = Console.ReadLine();
-        if(!fileName.EndsWith(".txt"))
-        {
-            fileName += ".txt";
-        }
+        // if(!fileName.EndsWith(".txt"))
+        // {
+        //     fileName += ".txt";
+        // }
         _goalList.Clear();
         LoadGoalsFromFile(fileName); 
     }
@@ -210,32 +206,33 @@ class GoalManager
             {
                 string nextLine = reader.ReadLine();
                 string[] goalData = GetGoalDataStrings(nextLine);
-                string goalType = goalData[0];  // count of 4 for simple and eternal, 7 for checklist
-                Console.WriteLine($"array is count {goalData.Length}");
-                string[] baseData = {goalData[1], goalData[2], goalData[3]};
+                string goalType = goalData[0];  // count of 5 for simple and 6 for eternal, 7 for checklist
+                //Console.WriteLine($"array is count {goalData.Length}");
+                string[] baseData = {goalData[1], goalData[2], goalData[3], goalData[4]};
                 switch (goalType)
                 {
                     case "simple":
                        _goalList.Add(new SimpleGoal( baseData ));
                         break;
                     case "checklist":
-                        string[] checklistData = {goalData[4], goalData[5], goalData[6]};
+                        string[] checklistData = {goalData[5], goalData[6], goalData[7]};
                         _goalList.Add(new ChecklistGoal(baseData, checklistData));
                         break;
                     case "eternal":
-                        _goalList.Add(new EternalGoal(baseData));
+                        _goalList.Add(new EternalGoal(baseData, goalData[5]));
                         break;
                     default:
                         new Exception($"Unknown: {nextLine} is not a goal.");
                         break;
                 }
-                Console.WriteLine("Finished loading the data.");
+                //Console.WriteLine("Finished loading a line of data.");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error loading goals: {ex.Message}");
             }
         }
+        Console.WriteLine("Finished loading Data From File.");
     }
     private string[] GetGoalDataStrings(string line){
         string[] data = line.Split(delimiter);
@@ -244,10 +241,22 @@ class GoalManager
 
     private void ShowRecordEventMenu()
     {
-        CheckForGoalsToRecord();
+        BuildListOfRecordableGoals();
+        int choice;
+
+        DisplayGoalList(_recordableGoalList);
         Console.WriteLine("Which goal would you like to record?");
-        //print "Which Goal have you compleated?"
-        //print list of goals and ask for user input for the number of the goal compleated.
+        string userInput = Console.ReadLine();
+        if (int.TryParse(userInput, out choice))
+        {
+            Goal g = _recordableGoalList[choice -1]; // subtract 1 so the index is now zero-based
+            g.RecordEvent();
+            Console.WriteLine($"The goal: {g.GetName()} has been Recorded.");
+        }
+        else 
+        {
+            Console.WriteLine("Error, Try again. Please Enter an Integer choice.");
+        }
     }
     public int ShowEventToRecord()
     { 
@@ -260,51 +269,59 @@ class GoalManager
         return index -1;
 
     }
-    public Goal GetEventToRecord(int indexToSelect)
+    // public Goal GetEventToRecord(int indexToSelect)
+    // {
+    //     int index = 1;
+    //     foreach(Goal goal in _goalList)
+    //     {
+    //         if (!goal.IsComplete())
+    //         {
+    //             if(index == indexToSelect)
+    //                 return goal;
+    //             index++;
+    //         }
+    //     }
+    //     return null;
+    // }
+    // public bool CheckForGoalsToRecord()//unneeded
+    // {
+    //     foreach (Goal goal in _goalList)
+    //     {
+    //         if (!goal.IsComplete())
+    //             return true;
+    //     }
+    //     return false;
+    // }
+    public void BuildListOfRecordableGoals()
     {
-        int index = 1;
-        foreach(Goal goal in _goalList)
-        {
-            if (!goal.IsComplete())
-            {
-                if(index == indexToSelect)
-                    return goal;
-                index++;
-            }
-        }
-        return null;
-    }
-    public bool CheckForGoalsToRecord()//unneeded
-    {
+        _recordableGoalList = new List<Goal>();
         foreach (Goal goal in _goalList)
         {
             if (!goal.IsComplete())
-                return true;
+                _recordableGoalList.Add(goal);
         }
-        return false;
+        Console.WriteLine($"recordableGoalsList count = {_recordableGoalList.Count}");
+    }
+
+    public void DisplayGoalList(List<Goal> list)
+    {
+        int index = 1;
+        foreach (Goal goal in list)
+        {
+            Console.WriteLine($"{index++} {goal.GetDetailsString()}");  
+        }
     }
     public void DisplayPlayerInfo() 
     {
-        int totalScore = 0;//changed from score //changed this from = GetTotalScore();
-        Console.Clear();
         if (_goalList.Count >0)
         {
-            Console.WriteLine("The goals are:");
-            foreach (Goal goal in _goalList)
-            {
-                Console.WriteLine(goal.GetDetailsString());
-                if (goal.IsComplete())
-                {
-                    Console.WriteLine(goal.GetDetailsString());//can take this out later
-                    totalScore += goal.GetPointsForCompletion();    
-                }   
-            }
+            DisplayGoalList(_goalList);
         }
         else
         {
             Console.WriteLine("No goals created or loaded");
         }
-        Console.WriteLine($"You have {totalScore} points.");
+        Console.WriteLine($"You have {GetTotalScore()} points.");
     }
     public void ListGoalDetails(Goal goal)
     { 
@@ -315,10 +332,7 @@ class GoalManager
         int totalScore = 0;
         foreach(Goal goal in _goalList)
         {
-            if (goal.IsComplete())
-            {
-                totalScore += goal.GetPointsForCompletion();
-            }   
+            totalScore += goal.GetScore();
         }
         return totalScore;
     }

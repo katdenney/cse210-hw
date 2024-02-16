@@ -21,6 +21,7 @@ class Goal
             _shortName = data[0];
             _description = data[1];
             _pointsForCompletion =int.Parse(data[2]);
+            _isCompleted = bool.Parse(data[3]);
     }
     public string GetName()
     {
@@ -30,19 +31,10 @@ class Goal
     {
         return _description;
     }
-    public int GetPointsForCompletion()
-    {
-        return _pointsForCompletion;
-    }
-    public virtual void RecordEvent()
-    {
-        if(!_isCompleted)
-        {
-        _isCompleted = true;
-        }
-    }
 
-    public virtual bool IsComplete()//This is where im stuck
+    public virtual void RecordEvent() {}
+
+    public virtual bool IsComplete()
     {
         return _isCompleted;   
     }
@@ -51,12 +43,18 @@ class Goal
         return _isCompleted ? "[X]" : "[ ]";
     }
 
-    public string GetDetailsString()
+    public virtual string GetDetailsString()
     {
-        return $"{_isCompleted}, {_shortName}, {_description}";
+        return $"{CompletedCheckbox()} {_shortName}, {_description}";
     }
     public virtual string GetStringRepresentation()
     {
-        return $"goal{delimiter+_shortName+delimiter+_description+delimiter+_isCompleted}";
+        return $"{_shortName+delimiter+_description+delimiter+_pointsForCompletion+delimiter+_isCompleted}";
     }
+
+    public virtual int GetScore()//ternary conditional operator
+    {
+        return _isCompleted?_pointsForCompletion:0;
+    }
+
 }
