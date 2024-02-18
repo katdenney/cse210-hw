@@ -1,9 +1,11 @@
 using System;
-
-class Program
+namespace ProductsProject
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Hello Foundation2 World!");
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello Foundation2 World!");
+        }
     }
 }
