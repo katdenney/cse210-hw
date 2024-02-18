@@ -5,7 +5,7 @@ namespace ProductsProject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello Foundation2 World!");
+            Console.WriteLine("Hello Foundation2 World!"+ "\n");
             Address address1 = new Address("1265 Stanford Lane","Sandy","UT","USA");
             Customer customer1 = new Customer("Alice Johnson", address1);
 
@@ -24,26 +24,29 @@ namespace ProductsProject
             Order order1 = new Order(customer1, "N000011");
             Product[] prods = {prod1, prod2};
             order1.AddProducts(prods);
-            Console.WriteLine(order1.GetPackingLabel());
             Console.WriteLine(order1.GetShippingLabel());
-            //Console.WriteLine($"Total Cost:{order1.GetTotalCost()}");
+            Console.WriteLine(order1.GetPackingLabel());
             order1.DisplayGetTotalCost();
+            //Console.WriteLine($"Total Cost:{order1.GetTotalCost()}");
+            
 
             Order order2 = new Order(customer2,"N000012");
             Product[] prods2 = {prod3, prod4};
             order2.AddProducts(prods2);
-            Console.WriteLine(order2.GetPackingLabel());
             Console.WriteLine(order2.GetShippingLabel());
-            //Console.WriteLine($"Total Cost:{order2.GetTotalCost()}");
+            Console.WriteLine(order2.GetPackingLabel());
             order2.DisplayGetTotalCost();
+            //Console.WriteLine($"Total Cost:{order2.GetTotalCost()}");
+            
 
             Order order3 = new Order(customer3,"N000013");
             Product[] prods3 = {prod5,prod6};
             order3.AddProducts(prods3);
-            Console.WriteLine(order3.GetPackingLabel());
             Console.WriteLine(order3.GetShippingLabel());
-            //Console.WriteLine($"Total Cost:{order3.GetTotalCost()}");
+            Console.WriteLine(order3.GetPackingLabel());
             order3.DisplayGetTotalCost();
+            //Console.WriteLine($"Total Cost:{order3.GetTotalCost()}");
+            
 
 
             

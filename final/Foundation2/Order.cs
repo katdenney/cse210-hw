@@ -28,7 +28,7 @@ namespace ProductsProject
         {
             Console.WriteLine($"Order Number: {_orderNumber}");
             Console.WriteLine($"Shipping Cost: ${GetShippingCost()}");
-            Console.WriteLine($"Total Cost: ${GetTotalCost()}");
+            Console.WriteLine($"Total Cost: ${GetTotalCost()}"+ "\n");
 
         }
         public int GetShippingCost()
@@ -45,8 +45,9 @@ namespace ProductsProject
         {
             Console.WriteLine("Packing Label:");
             string label = "";
-            foreach(Product p in _productList){
-                label += p.GetPackingString() + "\n";
+            foreach(Product p in _productList)
+            {
+                label += p.GetPackingString()+ "\n";
             }
             return label;
         }
