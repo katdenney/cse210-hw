@@ -27,6 +27,7 @@ namespace ProductsProject
         public void DisplayGetTotalCost()
         {
             Console.WriteLine($"Order Number: {_orderNumber}");
+            Console.WriteLine($"Shipping Cost: ${GetShippingCost()}");
             Console.WriteLine($"Total Cost: ${GetTotalCost()}");
 
         }
