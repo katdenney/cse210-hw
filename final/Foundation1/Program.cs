@@ -4,36 +4,39 @@ using System.Reflection;
 class Program
 {
     static void Main(string[] args)
-    {
+    {   Console.Clear();
         List <Video> _videoList = new List<Video>();
+        Console.WriteLine("*************************************************");
         Console.WriteLine("Hello Foundation1 World!");
         Video video1 = new Video("Funny Cats","Fred Smith",300);
         video1.AddComment("Emily Thompson","The purple giraffe danced salsa at the disco.");
         video1.AddComment("Jacob Miller","Flying pigs harmonized with talking bananas");
         video1.AddComment("Olivia Davis","Unicorns held a poetry slam in the candy forest");
-        video1.DisplayVideoInfo();
-        video1.DisplayCommentList();
+        //video1.DisplayVideoInfo();
+        //video1.DisplayCommentList();
         _videoList.Add(video1);
         Video video2 = new Video("DIY Creative Crafts","Ethan Harris",200);
         video2.AddComment("Ava Robinson","In space, marshmallows had a zero-gravity party.");
         video2.AddComment("Mason Turner","The ninja squirrel wore sunglasses to sneak around.");
         video2.AddComment("Sophia Clark","Pancakes challenged waffles to a syrup wrestling match.");
-        video2.DisplayVideoInfo();
-        video2.DisplayCommentList();
+        //video2.DisplayVideoInfo();
+        //video2.DisplayCommentList();
         _videoList.Add(video2);
         Video video3 = new Video("Tech Talk","Logan Bennett",600);
         video3.AddComment("Emily Thompson","Robots practiced breakdancing in the computer lab.");
         video3.AddComment("Jacob Miller","The sneezing elephant startled the quiet library.");
         video3.AddComment("Olivia Davis","Jellyfish organized an underwater fashion show.");
-        video3.DisplayVideoInfo();
-        video3.DisplayCommentList();
+        //video3.DisplayVideoInfo();
+        //video3.DisplayCommentList();
         _videoList.Add(video3);
 
         foreach (Video video in _videoList)
         {
+            Console.WriteLine("*************************************************");
             video.DisplayVideoInfo();
             video.DisplayCommentList();
         }
+        
 
     }
 }
