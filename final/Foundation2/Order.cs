@@ -5,36 +5,73 @@ namespace ProductsProject
     {
         private List <Product>_productList = new List<Product>();
         private Customer _customer;
-        private string _orederNumber;
+        private string _orderNumber;
 
-        public Order()
+        public Order(Customer customer, string orderNumber)
         {
-
+            _customer = customer;
+            _orderNumber = orderNumber;
         }
-        public int GetTotalCost()
+        public double GetTotalCost()
         {
-            return 1;//just for now
+            double totalCost = 0;
+            foreach (Product p in _productList)
+            {
+                totalCost += p.TotalCost();
+            }
+            totalCost += GetShippingCost();
+            double rounded = Math.Round(totalCost,2);
+            return rounded;
+            //The total price is calculated as the sum of the total cost of each product plus a one-time shipping cost
+        }
+        public void DisplayGetTotalCost()
+        {
+            
+            Console.WriteLine($"${GetTotalCost()}");
 
         }
         public int GetShippingCost()
         {
-            return 1;
+            if (_customer.GetIsUSA())
+            {
+                return 5;
+            }
+            else return 35;
+            //USA, then the shipping cost is $5
+            //not in the USA, then the shipping cost is $35
         }
         public string GetPackingLabel()
         {
-            return "string";
+            Console.WriteLine("Packing Label:");
+            string label = "";
+            foreach(Product p in _productList){
+                label += p.GetPackingString() + "\n";
+            }
+            return label;
         }
         public string GetShippingLabel()
         {
-            return "string";
+            Console.WriteLine("Shipping Label:");
+            return $"{_customer.Name},{_customer.Address.GetAddress()}";
         }
-        public void DisplayPackingLabel()
+        
+        public void AddProduct(string name,string productID,float price,int qty)
         {
-
+            Product newProduct = new Product(name, productID, price,qty);
+            _productList.Add(newProduct);
         }
-        public void DisplayShippingLabel()
-        {
 
+        public void AddProduct(Product newProduct)
+        {
+            _productList.Add(newProduct);
+        }
+
+        public void AddProducts(Product[] newProducts)
+        {
+            foreach(Product p in newProducts)
+            {
+                 _productList.Add(p);
+            }
         }
     }
 }

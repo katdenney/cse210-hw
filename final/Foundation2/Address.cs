@@ -1,4 +1,5 @@
 using System;
+using System.Dynamic;
 namespace ProductsProject
 {
     class Address
@@ -17,11 +18,11 @@ namespace ProductsProject
         }
         public bool IsUSA()
         {
-            return true;//just for now 
+            return _country == "USA"? true: false; 
         }
         public string GetAddress()
         {
-            return "address";//just for now
+            return $@"{_street} {_city}, {_stateOrProvince} {_country}";
         }
         
     }
