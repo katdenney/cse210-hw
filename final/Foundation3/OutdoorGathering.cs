@@ -18,14 +18,9 @@ namespace EventsProject
             _weather = weather;
         }
         
-        // public string GetStandardDetails()
-        // {
-        //     return$"{base.Title},{base.Description}, {base.Date}, {base.Address}";
-
-        // }
         public override string GetFullDetails()
         {
-            return $"{_kind} Event Full Details:\n*********\n Title:{base.Title}\nDescription:{base.Description}\nDate:{base.Date}\nAddress:{base.Address.GetAddress()}";
+            return $"{base.GetStandardDetails()} Address:{base.Address.GetAddress()}";
             //type of event, 
             //Lectures = speaker name, capacity 
             //Receptions = Emial RSVP confirmations

@@ -63,8 +63,7 @@ namespace EventsProject
         }
         public virtual string GetFullDetails()
         {
-            Console.WriteLine("Event class full details");
-            return $"{_title},{_description}, {_date}, {_address}";
+            return string.Empty;
             //type of event, 
             //Lectures = speaker name, capacity 
             //Receptions = Emial RSVP confirmations
