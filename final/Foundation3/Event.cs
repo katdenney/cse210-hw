@@ -57,7 +57,6 @@ namespace EventsProject
 
         public string GetStandardDetails()
         {
-            Console.WriteLine("Standard Details:\n*********");
             return $"Event Title: {_title}\nDescription: {_description}\nDate: {_date}\nAddress:\n {Address.GetAddress()}";
 
         }

@@ -3,22 +3,22 @@ namespace EventsProject
 {
     class Reception: Event
     { 
-        private int _RSVP;
+        private int _Rsvp;
         private string _kind = "Reception";
 
-        public Reception (string title, string description, string date, Address address, int RSVP)
+        public Reception (string title, string description, string date, Address address, int Rsvp)
         : base(title, description, date, address)
         {
-            _RSVP = RSVP;
+            _Rsvp = Rsvp;
         }
-        public Reception (string title, string description, string date, int RSVP)
+        public Reception (string title, string description, string date, int Rsvp)
         : base(title, description, date)
         {
-            _RSVP = RSVP;
+            _Rsvp = Rsvp;
         }
         public override string GetFullDetails()
         {
-            return $"{base.GetStandardDetails()}\nAddress:{base.Address.GetAddress()}";
+            return $"{base.GetStandardDetails()}Address:{base.Address.GetAddress()}RSVP Total: {_Rsvp}";
             //type of event, 
             //Lectures = speaker name, capacity 
             //Receptions = Emial RSVP confirmations
