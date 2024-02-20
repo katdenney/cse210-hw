@@ -16,11 +16,11 @@ namespace EventsProject
         {
             _RSVP = RSVP;
         }
-        public string GetStandardDetails()
-        {
-            return $"{base.Title},{base.Description}, {base.Date}, {base.Address}";
+        // public string GetStandardDetails()
+        // {
+        //     return $"{base.Title},{base.Description}, {base.Date}, {base.Address}";
 
-        }
+        // }
         public override string GetFullDetails()
         {
             return $"{_kind} Event Full Details:\n*********\n Title:{base.Title}\nDescription:{base.Description}\nDate:{base.Date}\nAddress:{base.Address.GetAddress()}";
