@@ -20,7 +20,7 @@ namespace EventsProject
         
         public override string GetFullDetails()
         {
-            return $"{base.GetStandardDetails()} Address:{base.Address.GetAddress()} Weather: {_weather}";
+            return $"The Type of event is {_kind}.\n{base.GetStandardDetails()}\nWeather: {_weather}";
             //type of event, 
             //Lectures = speaker name, capacity 
             //Receptions = Emial RSVP confirmations
@@ -28,7 +28,7 @@ namespace EventsProject
         }
         public override string GetShortDescription()
         {
-            return $"The Type of event is {_kind}\nThe Title is: {base.Title}\nThe Date is: {base.Date}";
+            return $"The Type of event is {_kind}.\nThe Title is: {base.Title}\nThe Date is: {base.Date}";
 
         }
 

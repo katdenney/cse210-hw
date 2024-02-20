@@ -41,8 +41,11 @@ class Program
             {
                 Console.WriteLine("------------------------");
                 Console.WriteLine($"{e.GetType()}");
+                Console.WriteLine($"\nGetStandardDetails().....");
                 Console.WriteLine(e.GetStandardDetails());
+                Console.WriteLine($"\nGetFullDetails().....");
                 Console.WriteLine(e.GetFullDetails());
+                Console.WriteLine($"\nGetShortDescription().....");
                 Console.WriteLine(e.GetShortDescription()); 
                 Console.WriteLine();                               
             }

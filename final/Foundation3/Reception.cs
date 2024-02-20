@@ -18,7 +18,7 @@ namespace EventsProject
         }
         public override string GetFullDetails()
         {
-            return $"{base.GetStandardDetails()}Address:{base.Address.GetAddress()}RSVP Total: {_Rsvp}";
+            return $"The Type of event is {_kind}.\n{base.GetStandardDetails()}\nRSVP Total: {_Rsvp}";
             //type of event, 
             //Lectures = speaker name, capacity 
             //Receptions = Emial RSVP confirmations
