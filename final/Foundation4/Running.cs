@@ -1,14 +1,10 @@
 using System;
-namespace Exercise
+namespace ExerciseProj
 {
-    class Running : Activity
+    class Running : Exercise
     {
         private string _type = "Running";
         private float _distance;
-        public float GetDistance()
-        {
-            return _distance;
-        }
         public Running(DateTime date, int minutes, float distance)
         :base(date,minutes)
         {
@@ -20,7 +16,7 @@ namespace Exercise
         }
         public override float GetDistanceMiles()
         {
-            return GetPace() * _minutes;
+            return _distance;
         }
         public override float GetSpeed()
         {
@@ -29,8 +25,6 @@ namespace Exercise
         public override float GetPace()
         {
             return 60/GetSpeed();
-        }
-    
-        
+        } 
     }
 }

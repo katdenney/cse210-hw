@@ -1,12 +1,12 @@
 using System;
-namespace Exercise
+namespace ExerciseProj
 {
-    class Activity
+    class Exercise
     {
         protected DateTime _date;
         protected int _minutes;
 
-        public Activity(DateTime date, int minutes)
+        public Exercise(DateTime date, int minutes)
         {
             _date = date;
             _minutes = minutes;

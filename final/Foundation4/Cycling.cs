@@ -1,7 +1,7 @@
 using System;
-namespace Exercise
+namespace ExerciseProj
 {
-    class Cycling : Activity
+    class Cycling : Exercise
     {
         private string _type = "Cycling";
         private float _speed;
