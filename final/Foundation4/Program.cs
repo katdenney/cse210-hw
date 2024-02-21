@@ -1,5 +1,7 @@
 using System;
+using System.Data;
 using System.Diagnostics;
+using System.Reflection.Emit;
 using ExerciseProj;
 using ExerciseProj =ExerciseProj.Exercise;
 
@@ -8,6 +10,8 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Hello Foundation4 World!");
+        Thread.Sleep(2000);
+        Console.Clear();
 
         List<Exercise> exerciseList =new List<Exercise>();
         Running running1 = new Running(DateTime.Now,30,3);

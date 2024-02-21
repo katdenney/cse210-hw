@@ -6,7 +6,16 @@ class Program
         static void Main(string[] args)
         {
             Console.WriteLine("Hello Foundation3 World!");
-            Console.WriteLine("------------------------");
+            Thread.Sleep(2000);
+            Console.Clear();
+            Console.WriteLine(
+            """
+            The Events will each display 
+            for 5 seconds until there are 
+            no more events to display.
+            """
+            );
+            Thread.Sleep(3000);
 
             List<Event> events = new List<Event>();
             //Lecture event1
@@ -39,15 +48,19 @@ class Program
             
             foreach(Event e in events)
             {
+                Console.Clear(); 
                 Console.WriteLine("------------------------");
                 Console.WriteLine($"{e.GetType()}");
                 Console.WriteLine($"\nGetStandardDetails().....");
                 Console.WriteLine(e.GetStandardDetails());
+                Thread.Sleep(2000);
                 Console.WriteLine($"\nGetFullDetails().....");
                 Console.WriteLine(e.GetFullDetails());
+                Thread.Sleep(2000);
                 Console.WriteLine($"\nGetShortDescription().....");
-                Console.WriteLine(e.GetShortDescription()); 
-                Console.WriteLine();                               
+                Console.WriteLine(e.GetShortDescription());
+                Console.WriteLine(); 
+                Thread.Sleep(5000);                             
             }
             
         }
