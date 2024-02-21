@@ -19,12 +19,12 @@ namespace ExerciseProj
         {//distance * _minutes/60 = _speed
             return GetPace() * _minutes;
         }
-        public virtual void DisplaySummary()
+        public override void DisplaySummary()
         {
             Console.WriteLine($"{GetSummary()}");
         }
 
-        public float GetSpeed()
+        public override float GetSpeed()
         {
             return _speed;
         }
