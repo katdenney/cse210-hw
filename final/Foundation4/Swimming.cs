@@ -16,12 +16,17 @@ namespace ExerciseProj
         }
         public override string GetSummary()
         {
-        return $"{_date}{_type}({_minutes})-Distance {GetDistanceMiles()} miles, Speed {GetSpeed()} mph, Pace: {GetPace()} min per mile";
+        return $"{_date.ToShortDateString()} {_type}({_minutes})-Distance {GetDistanceMiles()} miles, Speed {GetSpeed()} mph, Pace: {GetPace()} min per mile";
+        }
+        public override void DisplaySummary()
+        {
+            Console.WriteLine($"{GetSummary()}");
         }
         public override float GetDistanceMiles()
-        {//Distance (miles) = swimming laps * 50 / 1000 * 0.62
-            
-            return _laps * .05F *.62F;//F for float!!!
+        {//Distance (miles) = swimming laps * 50 / 1000 * 0.62F //F for float!!!
+            int meters = _laps * 50;//meters /50 = laps
+            float distance = (float)meters / 620.0f; 
+            return distance;
         }
         public override float GetSpeed()
         {//Speed (mph or kph) = (distance / minutes) * 60

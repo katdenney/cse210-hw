@@ -13,11 +13,15 @@ namespace ExerciseProj
         }
         public override string GetSummary()
         {
-        return $"{_date}{_type}({_minutes})-Distance {GetDistanceMiles()} miles, Speed {GetSpeed()} mph, Pace: {GetPace()} min per mile";
+        return $"{_date.ToShortDateString()} {_type}({_minutes})-Distance {GetDistanceMiles()} miles, Speed {GetSpeed()} mph, Pace: {GetPace()} min per mile";
         }
         public override float GetDistanceMiles()
         {//distance * _minutes/60 = _speed
             return GetPace() * _minutes;
+        }
+        public virtual void DisplaySummary()
+        {
+            Console.WriteLine($"{GetSummary()}");
         }
 
         public float GetSpeed()
