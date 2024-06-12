@@ -32,8 +32,6 @@ namespace ExerciseProj
         {
             return 60/_speed;
 
-        }
-        
-        
+        } 
     }
 }

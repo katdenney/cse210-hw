@@ -42,7 +42,7 @@ class Program
                 string prompt = promptInstance.GetPrompt();
                 Console.WriteLine($"{prompt}");
 
-                // get entry from user 
+                // get entry from user 0
                 Console.WriteLine("Answer: ");
                 string answerPrompt = Console.ReadLine();
 
